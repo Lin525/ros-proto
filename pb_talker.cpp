@@ -9,14 +9,14 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
 
   ros::Publisher pub =
-      n.advertise<mylcj::sample::PublishInfo>("/Sorbai", 1000);
+      n.advertise<mylcj::sample::PublishInfo>("/Lcj", 1000);
 
   ros::Rate loop_rate(10);
   
   mylcj::sample::PublishInfo proto_msg_info;
   proto_msg_info.set_name("lcj");
   proto_msg_info.set_message_type("test_message");
-  proto_msg_info.set_publish_msg("sorbai is a bilibili up");
+  proto_msg_info.set_publish_msg("lcj is making protocal buf");
 
   int count = 0;
   while (ros::ok()) {
