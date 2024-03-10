@@ -8,6 +8,7 @@ message RosProtoTest {
   string name = 2;
   double a = 3;
   repeated string n = 100;
+  map<string, string> mymap = 10;
 }
 
 // message mylcj {

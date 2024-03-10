@@ -28,6 +28,6 @@ ${CMAKE_CURRENT_BINARY_DIR})
 #
 # get_target_property(grpc_cpp_plugin_location gRPC::grpc_cpp_plugin LOCATION)
 protobuf_generate(TARGET proto_test LANGUAGE cpp)
-# protoc -I$SRC_DIR --cpp_out=$DST_DIR mylcj.proto
+# protoc -I$SRC_DIR --cpp_out=$DST_DIR mylcj.proto 
 # 使用protoc 
 # protobuf_generate(TARGET pb_proto LANGUAGE grpc GENERATE_EXTENSIONS .grpc.pb.h .grpc.pb.cc PLUGIN "protoc-gen-grpc=${grpc_cpp_plugin_location}")

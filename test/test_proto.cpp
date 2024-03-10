@@ -11,6 +11,7 @@ void PrintHex(const std::string& str) {
   std::cout << std::endl;
 }
 
+
 int main() {
   // std::string pb_str;
   // mylcj::sample::RosProtoTest proto_test;
@@ -57,6 +58,44 @@ int main() {
     des.append("type: ");
     des.append(google::protobuf::FieldDescriptor::TypeName(field->type()));
     des.append(";\n");
+    std::cout << field->type() << std::endl;
   }
   std::cout << des << std::endl;
+
+  mylcj::sample::RosProtoTest Psend;
+  Psend.set_num(2);
+  Psend.set_name("hahahahaha");
+  Psend.set_a(3.3333);
+  Psend.add_n("rep00000000");
+  Psend.add_n("rep11111111");
+  auto tmpmap = Psend.mutable_mymap();
+  (*tmpmap)["mykey111"] = "myvalue111";
+  (*tmpmap)["mykey222"] = "myvalue222";
+  // Psend.mymap("map1") = "map2";
+  std::string str;
+  Psend.SerializeToString(&str);
+  // std::cout << "str: " << str << std::endl; // 乱码
+
+  mylcj::sample::RosProtoTest Preceive;
+
+  // std::string str2 = "wrong string !!"; 
+  // Preceive.ParseFromString(str2); // 程序coredump 
+  Preceive.ParseFromString(str);
+  auto tmpmap2 = Preceive.mymap();
+  for(auto it = Preceive.mymap().cbegin(); it != Preceive.mymap().cend(); ++it)
+  {
+      std::cout << it->first << " " << it->second << std::endl;
+  }
+
+  std::cout << "Preceive.n(1): " << Preceive.n(1) << std::endl
+            << "Preceive.n(0): " << Preceive.n(0) << std::endl
+            << "Preceive.name(): " << Preceive.name() << std::endl
+            << "Preceive.a(): " << Preceive.a() << std::endl
+            << "Preceive.num(): " << Preceive.num() << std::endl
+            << "Preceive.descriptor(): " << Preceive.descriptor() << std::endl
+            << "Preceive.reflection(): " << Preceive.GetReflection() << std::endl;
+            // << "(*tmpmap2)["mykey111"]: " << (*tmpmap2)["mykey111"] << std::endl
+            // << "(*tmpmap2)["mykey222"]: " << (*tmpmap2)["mykey222"] << std::endl;
+
+  return 0;
 }
